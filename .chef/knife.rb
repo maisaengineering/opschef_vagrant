@@ -1,13 +1,11 @@
-# See http://docs.opscode.com/config_rb_knife.html for more information on knife configuration options
-
-current_dir = File.dirname(__FILE__)
 log_level                :info
 log_location             STDOUT
-node_name                "imaginationcoder"
-client_key               "#{current_dir}/imaginationcoder.pem"
-validation_client_name   "mykidslink-validator"
-validation_key           "#{current_dir}/mykidslink-validator.pem"
-chef_server_url          "https://api.opscode.com/organizations/mykidslink"
-cache_type               'BasicFile'
-cache_options( :path => "#{ENV['HOME']}/.chef/checksums" )
-cookbook_path            ["#{current_dir}/../cookbooks"]
+node_name                'admin'
+client_key               '/Users/imaginationcoder/dev/projects/kids_link/automation/opsvagrant/chef-repo/.chef/admin.pem'
+validation_client_name   'chef-validator'
+validation_key           '/Users/imaginationcoder/dev/projects/kids_link/automation/opsvagrant/chef-repo/.chef/chef-validator.pem'
+validation_key_path      '/Users/imaginationcoder/dev/projects/kids_link/automation/opsvagrant/chef-repo/.chef/chef-validator.pem'
+chef_server_url          'https://192.168.50.101'
+# syntax_check_cache_path  '/Users/imaginationcoder/dev/projects/kids_link/automation/opsvagrant/chef-repo/.chef/syntax_check_cache'
+cookbook_path ["cookbooks", "site-cookbooks"]
+knife["nodename"] = "chef_server"

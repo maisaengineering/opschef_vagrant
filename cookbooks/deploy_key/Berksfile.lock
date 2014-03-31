@@ -1,0 +1,7 @@
+{
+  "sources": {
+    "deploy_key": {
+      "path": "."
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+   "name":"storage",
+   "chef_type":"role",
+   "json_class":"Chef::Role",
+   "description":"The base role for systems that provide storage service",
+   "default_attributes":{
+      
+   },
+   "run_list":[
+      "recipe[kidsapp::vm_commons]",
+      "recipe[kidsapp::storageserver]"
+   ]
+}

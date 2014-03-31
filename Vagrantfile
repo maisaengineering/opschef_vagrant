@@ -1,83 +1,71 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
-# This is a Vagrant configuration file. It can be used to set up and manage
-# virtual machines on your local system or in the cloud. See http://downloads.vagrantup.com/
-# for downloads and installation instructions, and see http://docs.vagrantup.com/v2/
-# for more information and configuring and using Vagrant.
 
-Vagrant.configure("2") do |config|
-  # All Vagrant configuration is done here. The most common configuration
-  # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
 
-  # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "opscode-ubuntu-12.04-i386"
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "ubuntu_precise"
+  # config.berkshelf.enabled = true
+  config.vm.provider :virtualbox do |vb|
+    # Don't boot with headless mode
+    vb.gui = false
+  
+    # Use VBoxManage to customize the VM. For example to change memory:
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
+  end
+  
 
-  # The url from where the 'config.vm.box' box will be fetched if it
-  # doesn't already exist on the user's system.
-  config.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04-i386_provisionerless.box"
+   # config.chef.log_level = :debug
 
-  # This can be set to the host name you wish the guest machine to have. Vagrant
-  # will automatically execute the configuration necessary to make this happen.
-  config.vm.hostname = "imaginationcoder-starter"
+   host_cache_path = File.expand_path("../.cache", __FILE__)
+   guest_cache_path = "/tmp/vagrant-cache"
+   VAGRANT_JSON = JSON.parse(Pathname(__FILE__).dirname.join('nodes', 'chef.json').read)
 
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # port 8080 on the virtual machine is forwarded to port 9090 on the host.
-  # This will allow the virtual machine to communicate of the common proxy port 8080.
-  config.vm.network :forwarded_port, guest: 8080, host: 9090
+   # chef servers
+   config.vm.define "chef_server" do |chef_server|
+      chef_server.vm.box = "ubuntu_precise"
+      
+      chef_server.vm.network "private_network", ip: "192.168.50.101"
+       #   auto_config: false
+      # chef_server.vm.network :private_network, :ip => '127.0.0.9', :auto_network => true
 
-  # Create a private network, which allows host-only access to the machine
-  # using a specific IP.
-  # config.vm.network :private_network, ip: "192.168.33.10"
+      config.vm.provision :shell, :inline => "sudo apt-get update"          
+  #     config.vm.provision :shell, :inline => 'sudo apt-get install ruby1.9.2 ruby1.9.2-dev \
+  # rubygems1.9.2 irb1.9.2 ri1.9.2 rdoc1.9.2 \
+  # build-essential libopenssl-ruby1.9.2 libssl-dev zlib1g-dev'
+      # config.vm.provision :shell, :inline => "curl -sSL https://get.rvm.io | sudo bash -s stable"
+      # config.vm.provision :shell, :inline => "rvm install 1.9.2"
+      # config.vm.provision :shell, :inline => "sudosource /usr/local/rvm/scripts/rvm"
 
-  # Create a public network, which generally matched to bridged network.
-  # Bridged networks make the machine appear as another physical device on
-  # your network.
-  # config.vm.network :public_network
+  
+      config.vm.provision :shell, :inline => "sudo gem install chef --version 11.10.4 --no-rdoc --no-ri --conservative"          
+      chef_server.vm.provision :chef_solo do |chef|
+        chef.cookbooks_path = ["site-cookbooks", "cookbooks"]
+        chef.roles_path = "roles"
+        chef.data_bags_path = "data_bags"
+        chef.provisioning_path = guest_cache_path
+        
+        # You may also specify custom JSON attributes:
+        chef.run_list = VAGRANT_JSON.delete('run_list') if VAGRANT_JSON['run_list']
+        chef.json = VAGRANT_JSON
+        Dir.glob(Pathname(__FILE__).dirname.join('roles', 'chef.json')).each do |role|
+          chef.add_role(Pathname.new(role).basename(".*").to_s)
+        end
+      end
+    end
+    
+    # chef nodes
+    config.vm.define "web1" do |chef_client|
+       chef_client.vm.box = "ubuntu_precise"
+       chef_client.vm.network "private_network", ip: "192.168.50.201"
+       # chef_client.vm.provision :chef_client do |chef|
+       #   chef.node_name = "client1"
+       #   chef.chef_server_url = "https://192.168.50.101"
+       #   chef.validation_key_path = "/Users/imaginationcoder/dev/projects/kids_link/automation/opsvagrant/chef-repo/.chef/chef-validator.pem"
+       #   chef.delete_node = true
+       #   chef.delete_client = true
+       # end
+     end    
 
-  # Share an additional folder to the guest VM. The first argument is
-  # the path on the host to the actual folder. The second argument is
-  # the path on the guest to mount the folder. And the optional third
-  # argument is a set of non-required options.
-  # config.vm.synced_folder "../data", "/vagrant_data"
-
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
-  # Example for VirtualBox:
-  #
-  # config.vm.provider :virtualbox do |vb|
-  #   # Don't boot with headless mode
-  #   vb.gui = true
-  #
-  #   # Use VBoxManage to customize the VM. For example to change memory:
-  #   vb.customize ["modifyvm", :id, "--memory", "1024"]
-  # end
-  #
-  # View the documentation for the provider you're using for more
-  # information on available options.
-
-  # Enable provisioning with chef solo, specifying a cookbooks path, roles
-  # path, and data_bags path (all relative to this Vagrantfile), and adding
-  # some recipes and/or roles.
-  #
-  # config.vm.provision :chef_solo do |chef|
-  #   chef.cookbooks_path = "cookbooks"
-  #   chef.roles_path = "roles"
-  #   chef.data_bags_path = "data_bags"
-  #   chef.add_recipe "mysql"
-  #   chef.add_role "web"
-  #
-  #   # You may also specify custom JSON attributes:
-  #   chef.json = { :mysql_password => "foo" }
-  # end
-
-  # Enable provisioning with chef server, specifying the chef server URL,
-  # and the path to the validation key (relative to this Vagrantfile).
-  #
-  # config.vm.provision :chef_client do |chef|
-  #   chef.chef_server_url = "https://api.opscode.com/organizations/mykidslink"
-  #   chef.validation_client_name = "mykidslink-validator"
-  #   chef.validation_key_path = ".chef/mykidslink-validator.pem"
-  # end
 end
