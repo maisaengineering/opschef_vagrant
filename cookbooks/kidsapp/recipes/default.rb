@@ -20,8 +20,11 @@ include_recipe 'git'
 #     # puts ":users..." + node['matching_node'].to_s
 # end
 
+puts "CB Echo..."
 kidsapp_db = data_bag_item('keys', 'kidsapp')
-puts kidsapp_db.keys
+puts kidsapp_db[:gittoken]
+puts kidsapp_db["gittoken"]
+puts "...done"
 
 ######***######***######***######***######***######
 ### GROUP & USER MANAGEMENT

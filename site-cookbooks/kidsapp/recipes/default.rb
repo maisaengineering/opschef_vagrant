@@ -21,7 +21,11 @@ include_recipe 'git'
 # end
 
 kidsapp_db = data_bag_item('keys', 'kidsapp')
+
+puts "CB Echo..."
 puts kidsapp_db.keys
+puts "...done"
+
 
 ######***######***######***######***######***######
 ### GROUP & USER MANAGEMENT
@@ -75,8 +79,7 @@ deploy_key "kidsapp" do
   provider Chef::Provider::DeployKeyGithub
   path "#{klwebber_home}/.ssh"
   credentials({
-    :token => kidsapp_db[:gittoken]
-    # :token => '440f77d5dbfcdea370811ac88f1851eddc880e38'
+    :token => kidsapp_db["gittoken"]
   })
   repo 'maisaengineering/kidslink'
   mode 0740
