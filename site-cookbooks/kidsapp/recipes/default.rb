@@ -3,7 +3,7 @@
 # Recipe:: default
 #
 # Copyright (C) 2014 Chandan Benjaram
-# 
+#
 # All rights reserved - Do Not Redistribute
 #
 include_recipe 'git'
@@ -61,21 +61,23 @@ end
 directory "#{klwebber_home}/.ssh" do
   owner klwebber[:name]
   group klwebgrp[:name]
-  
-  mode 00700
+
+  mode 0740
   action :create
 end
 
+# generate sshkey --- avoid password prompt caused by deploy_key way
 execute "Generates ssh skys for #{klwebber[:name]}." do
   user klwebber[:name]
   creates "#{klwebber_home}/.ssh/kidsapp"
-  command "ssh-keygen -t rsa -q -f #{klwebber_home}/.ssh/kidsapp -P \"\""
+  command "ssh-keygen -t rsa -q -f #{klwebber_home}/.ssh/kidsapp -P \"\" -C ''"
 end
 
+# add key to GH
 deploy_key "kidsapp" do
   owner klwebber[:name]
   group klwebgrp[:name]
-  
+
   provider Chef::Provider::DeployKeyGithub
   path "#{klwebber_home}/.ssh"
   credentials({
@@ -83,30 +85,33 @@ deploy_key "kidsapp" do
   })
   repo 'maisaengineering/kidslink'
   mode 0740
-  
+
   action :add
 end
+
 
 deploy_wrapper 'kidsapp' do
   owner klwebber[:name]
   group klwebgrp[:name]
-  
+
   ssh_wrapper_dir "#{klwebber_home}/.ssh"
   ssh_key_dir "#{klwebber_home}/.ssh"
   ssh_key_file "#{klwebber_home}/.ssh/kidsapp"
   sloppy true
 end
 
+
+
 application 'kidsapp' do
   owner klwebber[:name]
   group klwebgrp[:name]
-  
+
   path  '/var/www/html/kidsapp'
   scm_provider  Chef::Provider::Git
   repository 'git@github.com:maisaengineering/kidslink.git'
-  
+
   environment_name  'development'
-  revision   'dev'
+  revision  'dev'
 
 
   # Apply the rails LWRP from application_ruby
@@ -125,5 +130,5 @@ end
 
 deploy_revision 'kidsapp' do
   git_ssh_wrapper "#{klwebber_home}/.ssh/kidsapp_deploy_wrapper.sh"
-  repository 'git@github.com:maisaengineering/kidslink.git'  
+  repository 'git@github.com:maisaengineering/kidslink.git'
 end

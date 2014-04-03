@@ -3,7 +3,7 @@
 # Recipe:: default
 #
 # Copyright (C) 2014 Chandan Benjaram
-# 
+#
 # All rights reserved - Do Not Redistribute
 #
 include_recipe 'git'
@@ -20,11 +20,12 @@ include_recipe 'git'
 #     # puts ":users..." + node['matching_node'].to_s
 # end
 
-puts "CB Echo..."
 kidsapp_db = data_bag_item('keys', 'kidsapp')
-puts kidsapp_db[:gittoken]
-puts kidsapp_db["gittoken"]
+
+puts "CB Echo..."
+puts kidsapp_db.keys
 puts "...done"
+
 
 ######***######***######***######***######***######
 ### GROUP & USER MANAGEMENT
@@ -60,37 +61,40 @@ end
 directory "#{klwebber_home}/.ssh" do
   owner klwebber[:name]
   group klwebgrp[:name]
-  
+
   mode 00700
   action :create
 end
-
-execute "Generates ssh skys for #{klwebber[:name]}." do
-  user klwebber[:name]
-  creates "#{klwebber_home}/.ssh/kidsapp"
-  command "ssh-keygen -t rsa -q -f #{klwebber_home}/.ssh/kidsapp -P \"\""
-end
+#
+# execute "Generates ssh keys for #{klwebber[:name]}." do
+#   user klwebber[:name]
+#   creates "#{klwebber_home}/.ssh/kidsapp"
+#   command "ssh-keygen -t rsa -q -f #{klwebber_home}/.ssh/kidsapp -P \"\""
+# end
 
 deploy_key "kidsapp" do
   owner klwebber[:name]
   group klwebgrp[:name]
-  
+
   provider Chef::Provider::DeployKeyGithub
+
+  label   "kidsapp"
   path "#{klwebber_home}/.ssh"
+
   credentials({
-    :token => kidsapp_db[:gittoken]
-    # :token => '440f77d5dbfcdea370811ac88f1851eddc880e38'
+    :token => kidsapp_db["gittoken"]
   })
-  repo 'maisaengineering/kidslink'
-  mode 0740
-  
-  action :add
+  # repo 'maisaengineering/kidslink'
+  repo  'git@github.com:maisaengineering/kidslink.git'
+  mode 00640
+
+  action :create
 end
 
 deploy_wrapper 'kidsapp' do
   owner klwebber[:name]
   group klwebgrp[:name]
-  
+
   ssh_wrapper_dir "#{klwebber_home}/.ssh"
   ssh_key_dir "#{klwebber_home}/.ssh"
   ssh_key_file "#{klwebber_home}/.ssh/kidsapp"
@@ -100,11 +104,13 @@ end
 application 'kidsapp' do
   owner klwebber[:name]
   group klwebgrp[:name]
-  
+
   path  '/var/www/html/kidsapp'
   scm_provider  Chef::Provider::Git
   repository 'git@github.com:maisaengineering/kidslink.git'
-  
+
+  deploy_key "#{klwebber_home}/.ssh/kidsapp"
+
   environment_name  'development'
   revision   'dev'
 
@@ -122,8 +128,8 @@ application 'kidsapp' do
   # end
 
 end
-
-deploy_revision 'kidsapp' do
-  git_ssh_wrapper "#{klwebber_home}/.ssh/kidsapp_deploy_wrapper.sh"
-  repository 'git@github.com:maisaengineering/kidslink.git'  
-end
+# 
+# deploy_revision 'kidsapp' do
+#   git_ssh_wrapper "#{klwebber_home}/.ssh/kidsapp_deploy_wrapper.sh"
+#   repository 'git@github.com:maisaengineering/kidslink.git'
+# end

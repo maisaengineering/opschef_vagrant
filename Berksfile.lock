@@ -6,11 +6,6 @@
     "nginx": {
       "locked_version": "0.101.6"
     },
-    "cookbook-deploy_key": {
-      "locked_version": "0.1.1",
-      "git": "git@github.com:cassianoleal/cookbook-deploy_key.git",
-      "ref": "d2f58d8a95031f735e5100ee01c5da9b2ddec7a7"
-    },
     "chef-deploy_wrapper": {
       "locked_version": "0.2.1",
       "git": "git@github.com:cwjohnston/chef-deploy_wrapper.git",

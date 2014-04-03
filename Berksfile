@@ -34,7 +34,6 @@ cookbook "nginx", "~> 0.101.5"
 # cookbook "myserver", :path => "/code/myserver-cookbook"
 
 site :opscode
-cookbook 'cookbook-deploy_key', git: 'git@github.com:cassianoleal/cookbook-deploy_key.git'
 cookbook 'chef-deploy_wrapper', git: 'git@github.com:cwjohnston/chef-deploy_wrapper.git'
 
 cookbook 'chef-server', git: 'git://github.com/opscode-cookbooks/chef-server.git'
