@@ -108,7 +108,7 @@ application 'kidsapp' do
 
   path  '/var/www/html/kidsapp'
   scm_provider  Chef::Provider::Git
-  repository 'git@github.com:maisaengineering/kidslink.git'
+  repository kidsapp_db["ghwebapprepo"]
 
   environment_name  'development'
   revision  'dev'
@@ -130,5 +130,5 @@ end
 
 deploy_revision 'kidsapp' do
   git_ssh_wrapper "#{klwebber_home}/.ssh/kidsapp_deploy_wrapper.sh"
-  repository 'git@github.com:maisaengineering/kidslink.git'
+  repository kidsapp_db["ghwebapprepo"]
 end

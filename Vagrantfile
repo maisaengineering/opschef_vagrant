@@ -6,6 +6,13 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 config.vm.box = "ubuntu_precise"
+
+# set auto_update to false, if you do NOT want to check the correct
+# additions version when booting this machine
+config.vbguest.auto_update = false
+# do NOT download the iso file from a webserver
+config.vbguest.no_remote = true
+
 # config.berkshelf.enabled = true
 config.vm.provider :virtualbox do |vb|
   # Don't boot with headless mode
@@ -15,9 +22,7 @@ config.vm.provider :virtualbox do |vb|
   vb.customize ["modifyvm", :id, "--memory", "1024"]
 end
 
-
  # config.chef.log_level = :debug
-
  host_cache_path = File.expand_path("../.cache", __FILE__)
  guest_cache_path = "/tmp/vagrant-cache"
  VAGRANT_JSON = JSON.parse(Pathname(__FILE__).dirname.join('nodes', 'chef.json').read)
@@ -37,8 +42,6 @@ end
     # config.vm.provision :shell, :inline => "curl -sSL https://get.rvm.io | sudo bash -s stable"
     # config.vm.provision :shell, :inline => "rvm install 1.9.2"
     # config.vm.provision :shell, :inline => "sudosource /usr/local/rvm/scripts/rvm"
-
-
     config.vm.provision :shell, :inline => "sudo gem install chef --version 11.10.4 --no-rdoc --no-ri --conservative"
     chef_server.vm.provision :chef_solo do |chef|
       chef.cookbooks_path = ["site-cookbooks", "cookbooks"]
@@ -55,17 +58,9 @@ end
     end
   end
 
-  # chef nodes
+  # chef nodes (not provisioned via vagrant plugin)
   config.vm.define "web1" do |chef_client|
      chef_client.vm.box = "ubuntu_precise"
      chef_client.vm.network "private_network", ip: "192.168.50.201"
-     # chef_client.vm.provision :chef_client do |chef|
-     #   chef.node_name = "client1"
-     #   chef.chef_server_url = "https://192.168.50.101"
-     #   chef.validation_key_path = "/Users/imaginationcoder/dev/projects/kids_link/automation/opsvagrant/chef-repo/.chef/chef-validator.pem"
-     #   chef.delete_node = true
-     #   chef.delete_client = true
-     # end
    end
-
 end

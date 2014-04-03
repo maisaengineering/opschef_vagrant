@@ -11,7 +11,5 @@ depends 'git'
 depends 'deploy_key'
 depends 'deploy_wrapper'
 depends 'sudo'
-# depends 'chef-github-deploy-key', '~> 0.0.2'
-
 depends 'application'
 depends 'application_ruby'

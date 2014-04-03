@@ -28,7 +28,7 @@
       "locked_version": "2.5.2"
     },
     "iptables": {
-      "locked_version": "0.12.0"
+      "locked_version": "0.13.0"
     },
     "logrotate": {
       "locked_version": "1.5.0"
@@ -37,13 +37,13 @@
       "locked_version": "1.1.1"
     },
     "build-essential": {
-      "locked_version": "1.4.4"
+      "locked_version": "2.0.0"
     },
     "runit": {
       "locked_version": "1.5.10"
     },
     "yum": {
-      "locked_version": "3.1.4"
+      "locked_version": "3.1.6"
     },
     "yum-epel": {
       "locked_version": "0.3.4"
@@ -58,13 +58,13 @@
       "locked_version": "1.0.2"
     },
     "git": {
-      "locked_version": "3.1.0"
+      "locked_version": "4.0.0"
     },
     "dmg": {
       "locked_version": "2.2.0"
     },
     "windows": {
-      "locked_version": "1.30.0"
+      "locked_version": "1.30.2"
     },
     "chef_handler": {
       "locked_version": "1.1.5"

@@ -37,6 +37,6 @@ site :opscode
 cookbook 'chef-deploy_wrapper', git: 'git@github.com:cwjohnston/chef-deploy_wrapper.git'
 
 cookbook 'chef-server', git: 'git://github.com/opscode-cookbooks/chef-server.git'
-cookbook 'kidsapp', '0.0.1', path: '/Users/imaginationcoder/dev/projects/kids_link/automation/opsvagrant/chef-repo/site-cookbooks/kidsapp'
+cookbook 'kidsapp', '0.0.1', path: 'site-cookbooks/kidsapp'
 cookbook 'rvm', github: 'fnichol/chef-rvm'
 cookbook 'sudo'

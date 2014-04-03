@@ -1,19 +1,19 @@
 {
-    "raise_license_exception": false, 
+    "raise_license_exception": false,
     "chef": {
-        "node_name": "admin", 
-        "validation_client_name": "chef-validator", 
-        "validation_key_path": "/Users/imaginationcoder/dev/projects/kids_link/automation/opsvagrant/chef-repo/.chef/chef-validator.pem", 
-        "chef_server_url": "https://192.168.50.101", 
-        "client_key": "/Users/imaginationcoder/dev/projects/kids_link/automation/opsvagrant/chef-repo/.chef/admin.pem"
-    }, 
+        "node_name": "admin",
+        "validation_client_name": "chef-validator",
+        "validation_key_path": ".chef/chef-validator.pem",
+        "chef_server_url": "https://192.168.50.101",
+        "client_key": ".chef/admin.pem"
+    },
     "ssl": {
         "verify": false
-    }, 
+    },
     "cookbook": {
-        "license": "reserved", 
-        "email": "labs@maisasolutions.com", 
+        "license": "reserved",
+        "email": "chandan.benjaram@gmail.com",
         "copyright": "Chandan Benjaram"
-    }, 
+    },
     "allowed_licenses": []
 }

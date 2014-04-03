@@ -62,34 +62,33 @@ directory "#{klwebber_home}/.ssh" do
   owner klwebber[:name]
   group klwebgrp[:name]
 
-  mode 00700
+  mode 0740
   action :create
 end
-#
-# execute "Generates ssh keys for #{klwebber[:name]}." do
-#   user klwebber[:name]
-#   creates "#{klwebber_home}/.ssh/kidsapp"
-#   command "ssh-keygen -t rsa -q -f #{klwebber_home}/.ssh/kidsapp -P \"\""
-# end
 
+# generate sshkey --- avoid password prompt caused by deploy_key way
+execute "Generates ssh skys for #{klwebber[:name]}." do
+  user klwebber[:name]
+  creates "#{klwebber_home}/.ssh/kidsapp"
+  command "ssh-keygen -t rsa -q -f #{klwebber_home}/.ssh/kidsapp -P \"\" -C ''"
+end
+
+# add key to GH
 deploy_key "kidsapp" do
   owner klwebber[:name]
   group klwebgrp[:name]
 
   provider Chef::Provider::DeployKeyGithub
-
-  label   "kidsapp"
   path "#{klwebber_home}/.ssh"
-
   credentials({
     :token => kidsapp_db["gittoken"]
   })
-  # repo 'maisaengineering/kidslink'
-  repo  'git@github.com:maisaengineering/kidslink.git'
-  mode 00640
+  repo 'maisaengineering/kidslink'
+  mode 0740
 
-  action :create
+  action :add
 end
+
 
 deploy_wrapper 'kidsapp' do
   owner klwebber[:name]
@@ -101,18 +100,18 @@ deploy_wrapper 'kidsapp' do
   sloppy true
 end
 
+
+
 application 'kidsapp' do
   owner klwebber[:name]
   group klwebgrp[:name]
 
   path  '/var/www/html/kidsapp'
   scm_provider  Chef::Provider::Git
-  repository 'git@github.com:maisaengineering/kidslink.git'
-
-  deploy_key "#{klwebber_home}/.ssh/kidsapp"
+  repository kidsapp_db["ghwebapprepo"]
 
   environment_name  'development'
-  revision   'dev'
+  revision  'dev'
 
 
   # Apply the rails LWRP from application_ruby
@@ -128,8 +127,8 @@ application 'kidsapp' do
   # end
 
 end
-# 
-# deploy_revision 'kidsapp' do
-#   git_ssh_wrapper "#{klwebber_home}/.ssh/kidsapp_deploy_wrapper.sh"
-#   repository 'git@github.com:maisaengineering/kidslink.git'
-# end
+
+deploy_revision 'kidsapp' do
+  git_ssh_wrapper "#{klwebber_home}/.ssh/kidsapp_deploy_wrapper.sh"
+  repository kidsapp_db["ghwebapprepo"]
+end
