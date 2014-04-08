@@ -13,29 +13,37 @@ default_attributes(
 #     :kladmin => { :password => "*", :comment => "KL Admin User", :uid => 1001, :group => :admins },
 #     :mpride => { :password => "*", :comment => "M Pride Support", :uid => 1002, :group => :admins },
 #   },
-#   
+#
   "common" => {
     "groups" => {
       "admin" => {"gid" => 786},
     },
     "users" => {
       "mpride" => { "password" => "*", "comment" => "M Pride Support", "uid" => 1002, "group" => "admin" },
-    } 
+    }
   },
   "webapp" => {
     "groups" => {
-      "klwebgrp" => { "gid" => 1786},
+      "klwebgrp" => { "gid" => 1786}
     },
     "users" => {
       "kladmin" => { "password" => "*", "comment" => "KL Admin User", "uid" => 1001, "group" => "admin" }
-    } 
+    }
+  },
+  "datastore" => {
+    "groups" => {
+      "kldsgrp" => { "gid" => 1586}
+    },
+    "users" => {
+      "kldser" => { "password" => "*", "comment" => "KL Database User", "uid" => 1001, "group" => "kldsgrp" }
+    }
   }
 )
-# 
-# 
+#
+#
 # name "base"
 # description "Baseline configuration for all systems."
-#  
+#
 # run_list(
 #   "recipe[ohai]",
 #   "recipe[chef-client::delete_validation]",
@@ -60,7 +68,7 @@ default_attributes(
 #   "recipe[postfix]",
 #   "recipe[munin::client]"
 # )
-#  
+#
 # default_attributes(
 #   "chef-client" => {
 #     "server_url" => "https://api.opscode.com/organizations/ORGNAME",
@@ -72,5 +80,5 @@ default_attributes(
 #       "users" => ["myusername"]
 #     }
 #   }
-# 
+#
 # )

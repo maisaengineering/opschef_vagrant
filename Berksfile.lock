@@ -16,9 +16,6 @@
       "git": "git://github.com/opscode-cookbooks/chef-server.git",
       "ref": "c588a4c401d3fac14f70d3285fe49eb4dccd9759"
     },
-    "kidsapp": {
-      "path": "./site-cookbooks/kidsapp"
-    },
     "rvm": {
       "locked_version": "0.9.1",
       "git": "git://github.com/fnichol/chef-rvm.git",
@@ -26,6 +23,14 @@
     },
     "sudo": {
       "locked_version": "2.5.2"
+    },
+    "mongodb": {
+      "locked_version": "0.16.0",
+      "git": "git@github.com:edelight/chef-mongodb.git",
+      "ref": "7931af10235925b676a66435b765fd96a5a1c705"
+    },
+    "kidsapp": {
+      "path": "./site-cookbooks/kidsapp"
     },
     "iptables": {
       "locked_version": "0.13.0"
@@ -69,6 +74,18 @@
     "chef_handler": {
       "locked_version": "1.1.5"
     },
+    "java": {
+      "locked_version": "1.22.0"
+    },
+    "chef_gem": {
+      "locked_version": "0.1.0"
+    },
+    "apt": {
+      "locked_version": "2.3.8"
+    },
+    "python": {
+      "locked_version": "1.4.6"
+    },
     "deploy_key": {
       "locked_version": "0.1.1"
     },
@@ -86,12 +103,6 @@
     },
     "passenger_apache2": {
       "locked_version": "2.2.0"
-    },
-    "java": {
-      "locked_version": "1.22.0"
-    },
-    "chef_gem": {
-      "locked_version": "0.1.0"
     }
   }
 }

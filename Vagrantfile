@@ -63,4 +63,10 @@ end
      chef_client.vm.box = "ubuntu_precise"
      chef_client.vm.network "private_network", ip: "192.168.50.201"
    end
+
+   config.vm.define "mongodb1" do |chef_client|
+      chef_client.vm.hostname="mongomaster"
+      chef_client.vm.box = "ubuntu_precise"
+      chef_client.vm.network "private_network", ip: "192.168.50.199"
+   end
 end
