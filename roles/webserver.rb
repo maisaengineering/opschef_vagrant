@@ -1,15 +1,18 @@
 name "webserver"
 description "Rails stack"
-run_list %w(recipe[kidsapp::vm_commons] recipe[rvm::system] recipe[sudo] recipe[rvm::vagrant] recipe[kidsapp::default])
+run_list %w(recipe[kidsapp::vm_commons] recipe[rvm::user_install] recipe[sudo] recipe[rvm::vagrant] recipe[kidsapp::default])
 default_attributes({
   "rvm" => {
     "rubies" => ["ruby-2.0.0-p451"],
     "default_ruby" => "ruby-2.0.0-p451",
-    "global_gems" => [
-      { 'name'    => 'bundler' },
-      { 'name'    => 'rake' },
-      { 'name' => 'chef'}
-    ]
+    "user_installs" => {
+      { 'user' => 'klwebber' }
+    }
+    # "global_gems" => [
+    #   { 'name'    => 'bundler' },
+    #   { 'name'    => 'rake' },
+    #   { 'name' => 'chef'}
+    # ]
   },
   "authorization" => {
     "sudo" => {
