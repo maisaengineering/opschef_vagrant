@@ -14,5 +14,5 @@ depends 'sudo'
 depends 'application'
 depends 'application_ruby'
 
-depends 'mongodb'
+# depends "mongodb"
 # depends 'yum', '>= 3.0'

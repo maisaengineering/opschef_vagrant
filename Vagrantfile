@@ -30,7 +30,7 @@ end
  # chef servers
  config.vm.define "chef_server" do |chef_server|
     chef_server.vm.box = "ubuntu_precise"
-
+    
     chef_server.vm.network "private_network", ip: "192.168.50.101"
      #   auto_config: false
     # chef_server.vm.network :private_network, :ip => '127.0.0.9', :auto_network => true
@@ -59,12 +59,13 @@ end
   end
 
   # chef nodes (not provisioned via vagrant plugin)
-  config.vm.define "web1" do |chef_client|
+  config.vm.define "app" do |chef_client|
+     chef_client.vm.hostname="app"
      chef_client.vm.box = "ubuntu_precise"
      chef_client.vm.network "private_network", ip: "192.168.50.201"
    end
 
-   config.vm.define "mongodb1" do |chef_client|
+   config.vm.define "mongomaster" do |chef_client|
       chef_client.vm.hostname="mongomaster"
       chef_client.vm.box = "ubuntu_precise"
       chef_client.vm.network "private_network", ip: "192.168.50.199"

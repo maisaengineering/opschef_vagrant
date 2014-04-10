@@ -19,23 +19,23 @@ default_attributes(
       "admin" => {"gid" => 786},
     },
     "users" => {
-      "mpride" => { "password" => "*", "comment" => "M Pride Support", "uid" => 1002, "group" => "admin" },
+      "mpride" => { "password" => "*", "comment" => "M Pride Support", "uid" => 1001, "group" => "admin" },
     }
   },
   "webapp" => {
     "groups" => {
-      "klwebgrp" => { "gid" => 1786}
+      "klwebgrp" => { "gid" => 5786}
     },
     "users" => {
-      "kladmin" => { "password" => "*", "comment" => "KL Admin User", "uid" => 1001, "group" => "admin" }
+      "klwebber" => { "password" => "04aqostCGmvZM", "comment" => "KL Web App User", "uid" => 5001, "group" => "klwebgrp" }
     }
   },
   "datastore" => {
     "groups" => {
-      "kldsgrp" => { "gid" => 1586}
+      "kldsgrp" => { "gid" => 9786}
     },
     "users" => {
-      "kldser" => { "password" => "*", "comment" => "KL Database User", "uid" => 1001, "group" => "kldsgrp" }
+      "kldser" => { "password" => "04aqostCGmvZM", "comment" => "KL Database User", "uid" => 9001, "group" => "kldsgrp" }
     }
   }
 )

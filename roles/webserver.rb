@@ -16,6 +16,9 @@ default_attributes({
       "groups" => ["vagrant", "root", "admin", "wheel", "klwebgrp"],
       "users" => ["vagrant", "root", "klwebber"]
     }
+  },
+  "rails"  => {
+    "max_pool_size" => 5
   }
 })
 
@@ -30,7 +33,7 @@ default_attributes({
 #   :users => {
 #   :klwebber => { :password => "*", :comment => "A Web User", :uid => 9051, :group => :klwebgrp },
 #   },
-#   
+#
 #   "rvm" => {
 #     "rubies" => ["ruby-2.0.0-p451"],
 #     "default_ruby" => "ruby-2.0.0-p451",
