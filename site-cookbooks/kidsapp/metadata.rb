@@ -13,6 +13,10 @@ depends 'deploy_wrapper'
 depends 'sudo'
 depends 'application'
 depends 'application_ruby'
+depends 'nginx'
+#depends 'http_stub_status_module'
+# depends 'rails'
+# depends 'passenger_apache2'
 
 # depends "mongodb"
 # depends 'yum', '>= 3.0'

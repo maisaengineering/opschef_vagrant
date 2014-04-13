@@ -100,11 +100,11 @@ deploy_wrapper 'kidsapp' do
   sloppy true
 end
 
-rvm_shell "passenger_module" do
-  ruby_string "ruby-2.0.0-p451"
-  code        "passenger-install-apache2-module --auto"
-  creates node[:passenger][:module_path]
-end
+# rvm_shell "passenger_module" do
+#   ruby_string "ruby-2.0.0-p451"
+#   code        "passenger-install-apache2-module --auto"
+#   creates node[:passenger][:module_path]
+# end
 
 application 'kidsapp' do
   owner klwebber[:name]
@@ -125,7 +125,7 @@ application 'kidsapp' do
     # application_ruby cookbook for more information.
     bundler true
     # restart_command 'touch /tmp/rails'
-    database_master_role "kidsapp_database_master"
+    # database_master_role "kidsapp_database_master"
 
     database do
       adapter "mongoid"
@@ -138,50 +138,20 @@ application 'kidsapp' do
     end
 
   end
-
-
-  # # Apply the passenger_apache2 LWRP, also from application_ruby
-  passenger_apache2 do
-    # Passenger-specific configuration.
-    application  "kidsapp"
-    server_aliases  [node[:hostname], "kidsapp"]
-    webapp_template  "kidsapp.conf.erb"
-    params  ({
-      server_name: node[:fqdn],
-      docroot: "/var/www/html/kidsapp/current/public",
-      rails_env: "development"
-    })
-  end
-
-  #
-  # <VirtualHost *:80>
-  #   ServerName <%= @params[:server_name] %>
-  #   ServerAlias <% @params[:server_aliases].each do |a| %><%= "#{a}" %> <% end %>
-  #   DocumentRoot <%= @params[:docroot] %>
-  #
-  #   RailsBaseURI /
-  #   RailsEnv <%= @params[:rails_env] %>
-  #   RailsAllowModRewrite on
-  #   PassengerMaxPoolSize <%= @node[:rails][:max_pool_size] %>
-  #
-  #   <Directory <%= @params[:docroot] %>>
-  #     Options FollowSymLinks
-  #     AllowOverride None
-  #     Order allow,deny
-  #     Allow from all
-  #   </Directory>
-  #
-  #   LogLevel info
-  #   ErrorLog <%= @node[:apache][:log_dir] %>/<%= @params[:name] %>-error.log
-  #   CustomLog <%= @node[:apache][:log_dir] %>/<%= @params[:name] %>-access.log combined
-  # </VirtualHost>
   #
   #
-  #
-
-
-
-
+  # # # Apply the passenger_apache2 LWRP, also from application_ruby
+  # passenger_apache2 do
+  #   # Passenger-specific configuration.
+  #   application  "kidsapp"
+  #   server_aliases  [node[:hostname], "kidsapp"]
+  #   webapp_template  "kidsapp.conf.erb"
+  #   params  ({
+  #     server_name: node[:fqdn],
+  #     docroot: "/var/www/html/kidsapp/current/public",
+  #     rails_env: "development"
+  #   })
+  # end
 
 end
 

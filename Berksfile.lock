@@ -3,9 +3,6 @@
     "apache2": {
       "locked_version": "1.9.6"
     },
-    "nginx": {
-      "locked_version": "0.101.6"
-    },
     "chef-deploy_wrapper": {
       "locked_version": "0.2.1",
       "git": "git@github.com:cwjohnston/chef-deploy_wrapper.git",
@@ -16,13 +13,17 @@
       "git": "git://github.com/opscode-cookbooks/chef-server.git",
       "ref": "c588a4c401d3fac14f70d3285fe49eb4dccd9759"
     },
-    "rvm": {
-      "locked_version": "0.9.1",
-      "git": "git://github.com/fnichol/chef-rvm.git",
-      "ref": "87f58d428c160337c1581ed1130a1a53d94e5126"
-    },
     "sudo": {
       "locked_version": "2.5.2"
+    },
+    "application": {
+      "locked_version": "4.1.4"
+    },
+    "application_ruby": {
+      "locked_version": "3.0.2"
+    },
+    "nginx": {
+      "locked_version": "2.6.2"
     },
     "mongodb": {
       "locked_version": "0.16.0",
@@ -31,6 +32,11 @@
     },
     "kidsapp": {
       "path": "./site-cookbooks/kidsapp"
+    },
+    "rbenv": {
+      "locked_version": "0.7.2",
+      "git": "git@github.com:fnichol/chef-rbenv.git",
+      "ref": "f2b53292e810dd2b43f6121f9958f5f29979dcb1"
     },
     "iptables": {
       "locked_version": "0.13.2"
@@ -41,8 +47,20 @@
     "pacman": {
       "locked_version": "1.1.1"
     },
+    "git": {
+      "locked_version": "4.0.0"
+    },
+    "dmg": {
+      "locked_version": "2.2.0"
+    },
     "build-essential": {
       "locked_version": "2.0.0"
+    },
+    "windows": {
+      "locked_version": "1.30.2"
+    },
+    "chef_handler": {
+      "locked_version": "1.1.6"
     },
     "runit": {
       "locked_version": "1.5.10"
@@ -53,6 +71,15 @@
     "yum-epel": {
       "locked_version": "0.3.6"
     },
+    "unicorn": {
+      "locked_version": "1.3.0"
+    },
+    "passenger_apache2": {
+      "locked_version": "2.2.0"
+    },
+    "apt": {
+      "locked_version": "2.3.8"
+    },
     "bluepill": {
       "locked_version": "2.3.1"
     },
@@ -60,28 +87,7 @@
       "locked_version": "1.12.2"
     },
     "ohai": {
-      "locked_version": "1.0.2"
-    },
-    "git": {
-      "locked_version": "4.0.0"
-    },
-    "dmg": {
-      "locked_version": "2.2.0"
-    },
-    "windows": {
-      "locked_version": "1.30.2"
-    },
-    "chef_handler": {
-      "locked_version": "1.1.6"
-    },
-    "java": {
-      "locked_version": "1.22.0"
-    },
-    "chef_gem": {
-      "locked_version": "0.1.0"
-    },
-    "apt": {
-      "locked_version": "2.3.8"
+      "locked_version": "1.1.12"
     },
     "python": {
       "locked_version": "1.4.6"
@@ -92,17 +98,11 @@
     "deploy_wrapper": {
       "locked_version": "0.2.0"
     },
-    "application": {
-      "locked_version": "4.1.4"
+    "ruby_build": {
+      "locked_version": "0.8.0"
     },
-    "application_ruby": {
-      "locked_version": "3.0.2"
-    },
-    "unicorn": {
-      "locked_version": "1.3.0"
-    },
-    "passenger_apache2": {
-      "locked_version": "2.2.0"
+    "java": {
+      "locked_version": "1.22.0"
     }
   }
 }
