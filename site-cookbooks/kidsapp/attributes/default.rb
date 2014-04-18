@@ -57,7 +57,7 @@ node.override['nginx'] = {
 
     "install_method"  => "package",
     "repo_source"  => "nginx",
-    "default_site_enabled" => false,
+    "default_site_enabled" => true,
     "default_root" => "/var/www/html/kidsapp/current/public/",
     "init_style" => "init",
     "source" => {
@@ -65,11 +65,11 @@ node.override['nginx'] = {
             "nginx::http_stub_status_module",
             "nginx::http_ssl_module",
             "nginx::http_gzip_static_module",
-            "nginx::passenger",
+            "nginx::passenger"
             ]
         },
     "passenger" => {
-        "version" => "4.0.14",
+        "version" => "4.0.41",
         "install_rake" => false,
         "ruby" => "/usr/local/rbenv/shims/ruby",
         "root" => "/usr/local/rbenv/versions/2.0.0-p451/lib/ruby/gems/2.0.0/gems/passenger-4.0.41",

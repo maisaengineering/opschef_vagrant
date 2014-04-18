@@ -4,3 +4,4 @@ metadata
 
 cookbook 'rbenv', :github => 'fnichol/chef-rbenv.git', :tag => 'v0.7.2'
 #cookbook 'rbenv', :git => 'git@github.com:fnichol/chef-rbenv.git', :branch => ''
+cookbook 'deploy_key', :git => 'git@github.com:cassianoleal/cookbook-deploy_key.git', :branch => '0.1.0'

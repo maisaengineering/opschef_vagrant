@@ -15,8 +15,8 @@ include_recipe 'ruby_build'
 include_recipe 'rbenv::system'
 include_recipe 'rbenv::vagrant'
 include_recipe 'apt::default'
-include_recipe 'nginx::source'
 
+include_recipe 'nginx::source'
 include_recipe 'kidsapp::default'
 
 

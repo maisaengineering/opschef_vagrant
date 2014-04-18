@@ -16,6 +16,7 @@
 #     # puts ":users..." + node['webapp'].to_s
 #     # puts ":users..." + node['matching_node'].to_s
 # end
+include_recipe 'git'
 
 kidsapp_db = data_bag_item('keys', 'kidsapp')
 
@@ -51,6 +52,11 @@ ohai "reload" do
   action :reload
 end
 
+gem_package 'rake' do
+  action :install
+  version '10.3.1'
+  options('--force')
+end
 
 ######***######***######***######***######***######
 ### WEB APP CONFIGURATION
@@ -103,13 +109,6 @@ end
 #   creates node[:passenger][:module_path]
 # end
 
-
-deploy_revision 'kidsapp' do
-  git_ssh_wrapper "#{klwebber_home}/.ssh/kidsapp_deploy_wrapper.sh"
-  repository kidsapp_db["ghwebapprepo"]
-end
-
-
 application 'kidsapp' do
   owner klwebber[:name]
   group klwebgrp[:name]
@@ -120,7 +119,6 @@ application 'kidsapp' do
 
   environment_name  'development'
   revision  'dev'
-  migrate   false
   # restart_command 'touch /tmp/rails'
 
   # Apply the rails LWRP from application_ruby
@@ -128,19 +126,19 @@ application 'kidsapp' do
     environment ({'RAILS_ENV' => 'development'})
     # Rails-specific configuration. See the README in the
     # application_ruby cookbook for more information.
-    #bundler true
+    # bundler true
     # restart_command 'touch /tmp/rails'
     # database_master_role "kidsapp_database_master"
-    #
-    # database do
-    #   adapter "mongoid"
-    #   host "dharma.mongohq.com:10041"
-    #   database "app15437481"
-    #   username "CBCHEF"
-    #   password "123456"
-    #   encoding utf8
-    #   reconnect true
-    # end
+
+    database do
+      adapter "mongoid"
+      host "dharma.mongohq.com:10041"
+      database "app15437481"
+      username "CBCHEF"
+      password "123456"
+      encoding utf8
+      reconnect true
+    end
 
   end
   #
@@ -158,4 +156,10 @@ application 'kidsapp' do
   #   })
   # end
 
+end
+
+deploy_revision 'kidsapp' do
+  keep_releases 2
+  git_ssh_wrapper "#{klwebber_home}/.ssh/kidsapp_deploy_wrapper.sh"
+  repository kidsapp_db["ghwebapprepo"]
 end
