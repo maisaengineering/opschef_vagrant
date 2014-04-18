@@ -1,3 +1,12 @@
+#
+# Cookbook Name:: site-cookbooks/kidsapp
+# Recipe:: datastore_mongo
+#
+# Copyright (C) 2014 Chandan Benjaram
+#
+# All rights reserved - Do Not Redistribute
+#
+
 # include_recipe "mongodb::10gen_repo"
 
 # recipe[mongodb::10gen_repo]

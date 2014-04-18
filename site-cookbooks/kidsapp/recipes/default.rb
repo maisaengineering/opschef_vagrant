@@ -6,9 +6,6 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-include_recipe 'git'
-
-# include_recipe 'deploy_key::github'
 
 # ruby_block "CB Echo..." do
 #     # These variables will now have the new values
@@ -106,6 +103,13 @@ end
 #   creates node[:passenger][:module_path]
 # end
 
+
+deploy_revision 'kidsapp' do
+  git_ssh_wrapper "#{klwebber_home}/.ssh/kidsapp_deploy_wrapper.sh"
+  repository kidsapp_db["ghwebapprepo"]
+end
+
+
 application 'kidsapp' do
   owner klwebber[:name]
   group klwebgrp[:name]
@@ -116,6 +120,7 @@ application 'kidsapp' do
 
   environment_name  'development'
   revision  'dev'
+  migrate   false
   # restart_command 'touch /tmp/rails'
 
   # Apply the rails LWRP from application_ruby
@@ -123,19 +128,19 @@ application 'kidsapp' do
     environment ({'RAILS_ENV' => 'development'})
     # Rails-specific configuration. See the README in the
     # application_ruby cookbook for more information.
-    bundler true
+    #bundler true
     # restart_command 'touch /tmp/rails'
     # database_master_role "kidsapp_database_master"
-
-    database do
-      adapter "mongoid"
-      host "dharma.mongohq.com:10041"
-      database "app15437481"
-      username "CBCHEF"
-      password "123456"
-      encoding utf8
-      reconnect true
-    end
+    #
+    # database do
+    #   adapter "mongoid"
+    #   host "dharma.mongohq.com:10041"
+    #   database "app15437481"
+    #   username "CBCHEF"
+    #   password "123456"
+    #   encoding utf8
+    #   reconnect true
+    # end
 
   end
   #
@@ -153,9 +158,4 @@ application 'kidsapp' do
   #   })
   # end
 
-end
-
-deploy_revision 'kidsapp' do
-  git_ssh_wrapper "#{klwebber_home}/.ssh/kidsapp_deploy_wrapper.sh"
-  repository kidsapp_db["ghwebapprepo"]
 end

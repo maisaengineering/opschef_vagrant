@@ -30,7 +30,7 @@ end
  # chef servers
  config.vm.define "chef_server" do |chef_server|
     chef_server.vm.box = "ubuntu_precise"
-    
+
     chef_server.vm.network "private_network", ip: "192.168.50.101"
      #   auto_config: false
     # chef_server.vm.network :private_network, :ip => '127.0.0.9', :auto_network => true

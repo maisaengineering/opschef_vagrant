@@ -1,55 +1,21 @@
-# This is a Berkshelf configuration file. It can be used to declare community
-# and third-party cookbook dependencies. You can install Berkshelf via the
-# command line by typing:
-#
-#   $ gem install berkshelf
-#
-# For more information on Berkshelf, see the documentation at
-# http://berkshelf.com/
-
-# This declares the default location to search for cookbooks. The key :opscode
-# tells Berkshelf to search community.opscode.com for cookbooks. For a list of
-# other valid keys, see the Berkshelf documentation
-# site :opscode
-
-# Example usage
-# -------------
-
-# Uncomment to download the latest apache2 cookbook from the community site.
-cookbook "apache2"
-
-# Uncomment to download a specific version of the nginx cookbook from
-# the community site. The ~> is called a pessimistic version
-# constraint. It will pick up any additional patch (bug) releases, but
-# will keep the minor version locked at 101. In other words, 0.101.X.
-#cookbook "nginx", "~> 0.101.5"
-
-# Berkshelf also allows you to define git locations. Uncomment the following line
-# to download the latest master branch from github for this cookbook.
-# cookbook "mysql", :git => "https://github.com/opscode-cookbooks/mysql.git"
-
-# Especially for local development, it's helpful to use a local path location.
-# Uncomment to point at a local cookbook on the filesystem, relative to the
-# current working directory.
-# cookbook "myserver", :path => "/code/myserver-cookbook"
-
 site :opscode
+
+cookbook 'sudo'
+
+
+cookbook 'ruby_build'
+cookbook 'rbenv', :github => 'fnichol/chef-rbenv.git', :tag => 'v0.7.2'
+# cookbook 'rbenv', :git => 'git@github.com:fnichol/chef-rbenv.git'
+
 cookbook 'chef-deploy_wrapper', git: 'git@github.com:cwjohnston/chef-deploy_wrapper.git'
 cookbook 'chef-server', git: 'git://github.com/opscode-cookbooks/chef-server.git'
-#cookbook 'rvm', github: 'fnichol/chef-rvm'
-cookbook 'sudo'
 
 cookbook "application", "~> 4.1.4"
 cookbook "application_ruby", git: "git@github.com:poise/application_ruby.git", ref: "f073ae50a58db1a0d496290888da457ee63244c8"
-
-cookbook "nginx", ">= 2.6.2"
-
 cookbook "mongodb", '>= 0.16.0', git: "git@github.com:edelight/chef-mongodb.git"
+
+cookbook "nginx", git: "git@github.com:maisaengineering/nginx.git",ref: "fa97b30cc0ec7fff27fa9f0fa034a80897dab3ff"
+
 cookbook 'kidsapp', '0.0.1', path: 'site-cookbooks/kidsapp'
 
-
-
-
-#cookbook 'ruby_build'
-cookbook 'rbenv',
-  :git => 'git@github.com:fnichol/chef-rbenv.git', :branch => 'v0.7.2'
+cookbook 'deploy_key', :git => 'git@github.com:cassianoleal/cookbook-deploy_key.git', :branch => '0.1.0'

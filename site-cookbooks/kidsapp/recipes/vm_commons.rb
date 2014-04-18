@@ -1,12 +1,11 @@
 #
 # Cookbook Name:: site-cookbooks/kidsapp
-# Recipe:: default
+# Recipe:: vm_commons
 #
 # Copyright (C) 2014 Chandan Benjaram
 #
 # All rights reserved - Do Not Redistribute
 #
-
 
 # apt-get command
 execute "apt-get-update" do

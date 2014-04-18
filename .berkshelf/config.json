@@ -1,6 +1,7 @@
 {
     "raise_license_exception": false,
     "chef": {
+        "cookbooks_path" : "cookbooks",
         "node_name": "admin",
         "validation_client_name": "chef-validator",
         "validation_key_path": ".chef/chef-validator.pem",

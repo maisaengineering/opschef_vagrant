@@ -6,17 +6,16 @@ description      'Installs/Configures site-cookbooks/kidsapp'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.0.1'
 
-
+depends 'apt'
 depends 'git'
+depends 'sudo'
+depends 'build-essential'
+depends 'ruby_build'
+depends 'rbenv', "~> 0.7.3"
+depends 'nginx'
+
 depends 'deploy_key'
 depends 'deploy_wrapper'
-depends 'sudo'
+
 depends 'application'
 depends 'application_ruby'
-depends 'nginx'
-#depends 'http_stub_status_module'
-# depends 'rails'
-# depends 'passenger_apache2'
-
-# depends "mongodb"
-# depends 'yum', '>= 3.0'

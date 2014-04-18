@@ -1,16 +1,16 @@
 #
 # Cookbook Name:: kidsapp
-# Recipe:: default
+# Recipe:: apache
 #
 # Copyright (C) 2014 Chandan Benjaram
-# 
+#
 # All rights reserved - Do Not Redistribute
 #
 
 
 # install apache
 package "apache2" do
-  action :install  
+  action :install
 end
 
 
@@ -26,4 +26,3 @@ cookbook_file "/var/www/index.html" do
   # owner "root"
   # group "root"
 end
-  

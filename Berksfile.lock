@@ -1,7 +1,15 @@
 {
   "sources": {
-    "apache2": {
-      "locked_version": "1.9.6"
+    "sudo": {
+      "locked_version": "2.5.2"
+    },
+    "ruby_build": {
+      "locked_version": "0.8.0"
+    },
+    "rbenv": {
+      "locked_version": "0.7.3",
+      "git": "git@github.com:fnichol/chef-rbenv.git",
+      "ref": "0a3018634bafe58ad21c6ee271af015220e444b9"
     },
     "chef-deploy_wrapper": {
       "locked_version": "0.2.1",
@@ -9,34 +17,44 @@
       "ref": "3a8ff8e6843d5ca27bbba8f2b7736427172f5203"
     },
     "chef-server": {
-      "locked_version": "2.1.3",
+      "locked_version": "2.1.5",
       "git": "git://github.com/opscode-cookbooks/chef-server.git",
-      "ref": "c588a4c401d3fac14f70d3285fe49eb4dccd9759"
-    },
-    "sudo": {
-      "locked_version": "2.5.2"
+      "ref": "14a50c59023bce36be24b502ea74d4bd0276ac4f"
     },
     "application": {
       "locked_version": "4.1.4"
     },
     "application_ruby": {
-      "locked_version": "3.0.2"
-    },
-    "nginx": {
-      "locked_version": "2.6.2"
+      "locked_version": "3.0.2",
+      "git": "git@github.com:poise/application_ruby.git",
+      "ref": "f073ae50a58db1a0d496290888da457ee63244c8"
     },
     "mongodb": {
       "locked_version": "0.16.0",
       "git": "git@github.com:edelight/chef-mongodb.git",
-      "ref": "7931af10235925b676a66435b765fd96a5a1c705"
+      "ref": "ff69248e5b1453f6d3958d88b11bf9b0744525c8"
+    },
+    "nginx": {
+      "locked_version": "2.6.3",
+      "git": "git@github.com:maisaengineering/nginx.git",
+      "ref": "fa97b30cc0ec7fff27fa9f0fa034a80897dab3ff"
     },
     "kidsapp": {
       "path": "./site-cookbooks/kidsapp"
     },
-    "rbenv": {
-      "locked_version": "0.7.2",
-      "git": "git@github.com:fnichol/chef-rbenv.git",
-      "ref": "f2b53292e810dd2b43f6121f9958f5f29979dcb1"
+    "deploy_key": {
+      "locked_version": "0.1.0",
+      "git": "git@github.com:cassianoleal/cookbook-deploy_key.git",
+      "ref": "12692bdc6de3a7056e8400774bb3d1baab1fdd72"
+    },
+    "java": {
+      "locked_version": "1.22.0"
+    },
+    "unicorn": {
+      "locked_version": "1.3.0"
+    },
+    "apache2": {
+      "locked_version": "1.10.2"
     },
     "iptables": {
       "locked_version": "0.13.2"
@@ -47,20 +65,11 @@
     "pacman": {
       "locked_version": "1.1.1"
     },
-    "git": {
-      "locked_version": "4.0.0"
-    },
-    "dmg": {
+    "passenger_apache2": {
       "locked_version": "2.2.0"
     },
     "build-essential": {
       "locked_version": "2.0.0"
-    },
-    "windows": {
-      "locked_version": "1.30.2"
-    },
-    "chef_handler": {
-      "locked_version": "1.1.6"
     },
     "runit": {
       "locked_version": "1.5.10"
@@ -71,14 +80,11 @@
     "yum-epel": {
       "locked_version": "0.3.6"
     },
-    "unicorn": {
-      "locked_version": "1.3.0"
-    },
-    "passenger_apache2": {
-      "locked_version": "2.2.0"
-    },
     "apt": {
       "locked_version": "2.3.8"
+    },
+    "python": {
+      "locked_version": "1.4.6"
     },
     "bluepill": {
       "locked_version": "2.3.1"
@@ -89,20 +95,20 @@
     "ohai": {
       "locked_version": "1.1.12"
     },
-    "python": {
-      "locked_version": "1.4.6"
+    "git": {
+      "locked_version": "4.0.0"
     },
-    "deploy_key": {
-      "locked_version": "0.1.1"
+    "dmg": {
+      "locked_version": "2.2.0"
+    },
+    "windows": {
+      "locked_version": "1.30.2"
+    },
+    "chef_handler": {
+      "locked_version": "1.1.6"
     },
     "deploy_wrapper": {
       "locked_version": "0.2.0"
-    },
-    "ruby_build": {
-      "locked_version": "0.8.0"
-    },
-    "java": {
-      "locked_version": "1.22.0"
     }
   }
 }
