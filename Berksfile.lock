@@ -37,7 +37,7 @@
     "nginx": {
       "locked_version": "2.6.3",
       "git": "git@github.com:maisaengineering/nginx.git",
-      "ref": "fa97b30cc0ec7fff27fa9f0fa034a80897dab3ff"
+      "ref": "0b5ca18342470da8c45289bf26c92651791ebde1"
     },
     "kidsapp": {
       "path": "./site-cookbooks/kidsapp"

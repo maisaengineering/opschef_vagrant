@@ -13,6 +13,7 @@ depends 'build-essential'
 depends 'ruby_build'
 depends 'rbenv', "~> 0.7.3"
 depends 'nginx'
+depends 'chef-server'
 
 depends 'deploy_key'
 depends 'deploy_wrapper'

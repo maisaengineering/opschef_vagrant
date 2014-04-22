@@ -46,37 +46,80 @@ node.override['vagrant'] = {
 }
 
 
+
+# # nginx
+# node.override['nginx']['user'] = "nginxer"
+# node.override['nginx']['group'] = "root"
+#
+#
+#
+# ### COPY
+# node.override['nginx']['version']= '1.4.5'
+# node.override['nginx']['dir']= '/etc/nginx'
+# node.override['nginx']['log_dir']= '/var/log/nginx'
+# node.override['nginx']['binary']= "/opt/nginx-#{node['nginx']['version']}/sbin"
+# node.override['nginx']['init_style']= 'init'
+# node.override['nginx']['default_site_enabled']= false
+#
+#
+# node.override['nginx']['source']['sbin_path']= "#{node['nginx']['binary']}/nginx"
+# node.override['nginx']['source']['version']= node['nginx']['version']
+# node.override['nginx']['source']['modules']= ["nginx::http_stub_status_module", "nginx::http_ssl_module", "nginx::http_gzip_static_module", "nginx::passenger"]
+# node.override['nginx']['source']['prefix'] = "/opt/nginx-#{node['nginx']['source']['version']}"
+# node.override['nginx']['source']['default_configure_flags'] = ["--prefix=#{node['nginx']['source']['prefix']}","--conf-path=#{node['nginx']['dir']}/nginx.conf", "--sbin-path=#{node['nginx']['source']['sbin_path']}"]
+# node.override['nginx']['source']['url'] = "http://nginx.org/download/nginx-#{node['nginx']['source']['version']}.tar.gz"
+# #
+# # # passenger
+# node.override['nginx']['passenger']['version'] = '4.0.37'
+# node.override['nginx']['passenger']['ruby'] = "/usr/local/rbenv/shims/ruby"
+# node.override['nginx']['passenger']['gem_binary'] = "/usr/local/rbenv/versions/2.0.0-p451/bin/gem"
+# node.override['nginx']['passenger']['root'] = "/usr/local/rbenv/versions/2.0.0-p451/lib/ruby/gems/2.0.0/gems/passenger-4.0.37"
+# node.override['nginx']['configure_flags'] = ["--add-module=/usr/local/rbenv/versions/2.0.0-p451/lib/ruby/gems/2.0.0/gems/passenger-4.0.41/ext/nginx"]
+#
+# node.override['runit']['service_dir'] = "#{node['nginx']['binary']"
+#
+#
+
+
 node.override['nginx'] = {
-    "version" => "1.4.0",
+    "version" => "1.4.5",
     "dir" => "/etc/nginx",
     "log_dir" => "/var/log/nginx",
     "user" => "nginxer",
     "group" => "root",
-    "binary" => "/opt/nginx-2.6.2/sbin",
-    "use_existing_user" => true,
+    "use_existing_user" => false,
 
-    "install_method"  => "package",
-    "repo_source"  => "nginx",
-    "default_site_enabled" => true,
-    "default_root" => "/var/www/html/kidsapp/current/public/",
+    "binary" => "/opt/nginx-1.4.5/sbin",
     "init_style" => "init",
+    "prefix" => false,
+
     "source" => {
+        "sbin_path" => "/opt/nginx-1.4.5/sbin/nginx",
+        "version" => "1.4.5",
+        "prefix" => "/opt/nginx-1.4.5",
+
         "modules" => [
             "nginx::http_stub_status_module",
             "nginx::http_ssl_module",
             "nginx::http_gzip_static_module",
             "nginx::passenger"
-            ]
-        },
+        ],
+        "default_configure_flags" => [
+            "--prefix=/opt/nginx-1.4.5","--conf-path=/etc/nginx/nginx.conf", "--sbin-path=/opt/nginx-1.4.5/sbin/nginx"
+        ],
+
+        "url" => "http://nginx.org/download/nginx-1.4.5.tar.gz"
+    },
     "passenger" => {
         "version" => "4.0.41",
-        "install_rake" => false,
         "ruby" => "/usr/local/rbenv/shims/ruby",
+        "gem_binary" => "/usr/local/rbenv/versions/2.0.0-p451/bin/gem",
         "root" => "/usr/local/rbenv/versions/2.0.0-p451/lib/ruby/gems/2.0.0/gems/passenger-4.0.41",
-        "www_dir" => "/var/www/html/kidsapp/current/public",
         "gems" => []
     },
     "configure_flags" => [
       "--add-module=/usr/local/rbenv/versions/2.0.0-p451/lib/ruby/gems/2.0.0/gems/passenger-4.0.41/ext/nginx"
     ]
 }
+
+# node.override['runit']['service_dir']= "/usr/local/nginx/sbin/"

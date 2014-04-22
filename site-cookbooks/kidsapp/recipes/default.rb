@@ -37,6 +37,14 @@ group klwebgrp[:name] do
   append  true
 end
 
+### ADD NGINX USER TO APP GROUP
+group "#{klwebgrp[:name]}" do
+  action :modify
+  members "nginxer"
+  append true
+end
+
+### CREATE/ADD APP USER TO APP GROUP
 user klwebber[:name] do
   supports :manage_home => true
   gid klwebgrp[:gid]
