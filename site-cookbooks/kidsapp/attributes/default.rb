@@ -37,7 +37,7 @@ node.override['rbenv']= {
 node.override['authorization'] = {
     "sudo" => {
       "groups" => ["vagrant", "root", "admin", "wheel", "klwebgrp"],
-      "users" => ["vagrant", "root", "klwebber"]
+      "users" => ["vagrant", "root", "klwebber", "nginxer"]
     }
 }
 
@@ -81,13 +81,21 @@ node.override['vagrant'] = {
 #
 
 
+node.override['java'] = {
+    "install_flavor" => "oracle",
+    "jdk_version" => "6",
+    "oracle" => {
+      "accept_oracle_download_terms" => true
+    }
+}
+
 node.override['nginx'] = {
     "version" => "1.4.5",
     "dir" => "/etc/nginx",
     "log_dir" => "/var/log/nginx",
-    "user" => "nginxer",
-    "group" => "root",
-    "use_existing_user" => false,
+    "user" => "klwebber",
+    "group" => "klwegrp",
+    "use_existing_user" => true,
 
     "binary" => "/opt/nginx-1.4.5/sbin",
     "init_style" => "init",
@@ -97,6 +105,11 @@ node.override['nginx'] = {
         "sbin_path" => "/opt/nginx-1.4.5/sbin/nginx",
         "version" => "1.4.5",
         "prefix" => "/opt/nginx-1.4.5",
+
+        "user" => "klwebber",
+        "group" => "root",
+        "use_existing_user" => true,
+
 
         "modules" => [
             "nginx::http_stub_status_module",
@@ -121,5 +134,3 @@ node.override['nginx'] = {
       "--add-module=/usr/local/rbenv/versions/2.0.0-p451/lib/ruby/gems/2.0.0/gems/passenger-4.0.41/ext/nginx"
     ]
 }
-
-# node.override['runit']['service_dir']= "/usr/local/nginx/sbin/"

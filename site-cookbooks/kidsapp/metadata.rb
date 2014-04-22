@@ -11,7 +11,7 @@ depends 'git'
 depends 'sudo'
 depends 'build-essential'
 depends 'ruby_build'
-depends 'rbenv', "~> 0.7.3"
+depends 'rbenv', "~> 0.7.2"
 depends 'nginx'
 depends 'chef-server'
 
@@ -20,3 +20,4 @@ depends 'deploy_wrapper'
 
 depends 'application'
 depends 'application_ruby'
+depends 'java'

@@ -4,7 +4,7 @@ cookbook 'sudo'
 
 
 cookbook 'ruby_build'
-cookbook 'rbenv', :github => 'fnichol/chef-rbenv.git', :tag => 'v0.7.2'
+cookbook 'rbenv', :git => 'git@github.com:fnichol/chef-rbenv.git', :branch => 'v0.7.2'
 # cookbook 'rbenv', :git => 'git@github.com:fnichol/chef-rbenv.git'
 
 cookbook 'chef-deploy_wrapper', git: 'git@github.com:cwjohnston/chef-deploy_wrapper.git'
@@ -19,3 +19,5 @@ cookbook "nginx", git: "git@github.com:maisaengineering/nginx.git",ref: "0b5ca18
 cookbook 'kidsapp', '0.0.1', path: 'site-cookbooks/kidsapp'
 
 cookbook 'deploy_key', :git => 'git@github.com:cassianoleal/cookbook-deploy_key.git', :branch => '0.1.0'
+
+cookbook 'java'

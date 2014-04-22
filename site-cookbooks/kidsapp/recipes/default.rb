@@ -44,6 +44,13 @@ group "#{klwebgrp[:name]}" do
   append true
 end
 
+### ADD NGINX USER TO APP GROUP
+group "root" do
+  action :modify
+  members "#{klwebber}"
+  append true
+end
+
 ### CREATE/ADD APP USER TO APP GROUP
 user klwebber[:name] do
   supports :manage_home => true
@@ -55,16 +62,23 @@ user klwebber[:name] do
   comment klwebber[:comment]
 end
 
+
+group "root" do
+  action :modify
+  members "#{klwebber[:name]}"
+  append true
+end
+
 ### Reload OHAI per http://docs.opscode.com/resource_user.html
 ohai "reload" do
   action :reload
 end
-
-gem_package 'rake' do
-  action :install
-  version '10.3.1'
-  options('--force')
-end
+#
+# gem_package 'rake' do
+#   action :install
+#   version '10.3.1'
+#   options('--force')
+# end
 
 ######***######***######***######***######***######
 ### WEB APP CONFIGURATION
@@ -135,6 +149,8 @@ application 'kidsapp' do
     # Rails-specific configuration. See the README in the
     # application_ruby cookbook for more information.
     # bundler true
+    # bundler_deployment true
+    # bundle_options "2>&1 | tee -a /tmp/bundler.log"
     # restart_command 'touch /tmp/rails'
     # database_master_role "kidsapp_database_master"
 

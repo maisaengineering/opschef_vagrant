@@ -19,6 +19,8 @@ include_recipe 'apt::default'
 include_recipe 'nginx::source'
 include_recipe 'kidsapp::default'
 
+include_recipe 'java'
+
 
 
 puts "CB spitting..."
