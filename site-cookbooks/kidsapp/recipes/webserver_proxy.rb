@@ -7,23 +7,25 @@
 # All rights reserved - Do Not Redistribute
 #
 include_recipe 'kidsapp::vm_commons'
-include_recipe 'git::default'
-include_recipe 'sudo'
-include_recipe 'build-essential::default'
-include_recipe 'ruby_build'
-
-include_recipe 'rbenv::system'
-include_recipe 'rbenv::vagrant'
 include_recipe 'apt::default'
-
-include_recipe 'nginx::source'
-include_recipe 'kidsapp::default'
-
+include_recipe 'build-essential::default'
 include_recipe 'java'
 
+include_recipe 'git::default'
+include_recipe 'sudo'
 
+include_recipe 'ruby_build::default'
+include_recipe 'rbenv::system'
+include_recipe 'rbenv::vagrant'
 
-puts "CB spitting..."
-# node.each  do |k, v|
-#   puts "key...#{k}, value...#{v}"
-# end
+include_recipe 'kidsapp::railsapp'
+
+include_recipe 'nginx::source'
+
+template "#{node["nginx"]["dir"]}/conf.d/passenger.conf" do
+  source 'passenger.conf.erb'
+  owner  'root'
+  group  'root'
+  mode   '0644'
+  notifies :reload, 'service[nginx]'
+end
