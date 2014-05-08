@@ -5,7 +5,6 @@ cookbook 'ruby_build'
 cookbook 'rbenv', :git => 'https://github.com/fnichol/chef-rbenv.git', :ref => "0a3018634bafe58ad21c6ee271af015220e444b9"
 
 # cookbook 'rbenv', :git => 'git@github.com:fnichol/chef-rbenv.git'
-https://github.com/cwjohnston/chef-deploy_wrapper.git
 cookbook 'chef-deploy_wrapper', git: 'https://github.com/cwjohnston/chef-deploy_wrapper.git'
 cookbook 'chef-server', git: 'https://github.com/opscode-cookbooks/chef-server.git'
 
