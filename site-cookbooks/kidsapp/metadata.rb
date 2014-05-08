@@ -18,6 +18,6 @@ depends 'chef-server'
 depends 'deploy_key'
 depends 'deploy_wrapper'
 
-depends 'application'
-depends 'application_ruby'
+# depends 'application'
+# depends 'application_ruby'
 depends 'java'
