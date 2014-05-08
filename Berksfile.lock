@@ -57,9 +57,6 @@
     "pacman": {
       "locked_version": "1.1.1"
     },
-    "passenger_apache2": {
-      "locked_version": "2.2.0"
-    },
     "build-essential": {
       "locked_version": "2.0.0"
     },
