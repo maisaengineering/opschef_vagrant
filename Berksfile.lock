@@ -21,14 +21,6 @@
       "git": "https://github.com/opscode-cookbooks/chef-server.git",
       "ref": "14a50c59023bce36be24b502ea74d4bd0276ac4f"
     },
-    "application": {
-      "locked_version": "4.1.4"
-    },
-    "application_ruby": {
-      "locked_version": "3.0.2",
-      "git": "https://github.com/poise/application_ruby.git",
-      "ref": "fde770d176b5d0519982e2ec93bcf2d1a3ad35bb"
-    },
     "mongodb": {
       "locked_version": "0.16.0",
       "git": "https://github.com/edelight/chef-mongodb.git",
