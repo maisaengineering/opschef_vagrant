@@ -13,12 +13,12 @@
     },
     "chef-deploy_wrapper": {
       "locked_version": "0.2.1",
-      "git": "git@github.com:cwjohnston/chef-deploy_wrapper.git",
+      "git": "https://github.com/cwjohnston/chef-deploy_wrapper.git",
       "ref": "3a8ff8e6843d5ca27bbba8f2b7736427172f5203"
     },
     "chef-server": {
       "locked_version": "2.1.5",
-      "git": "git://github.com/opscode-cookbooks/chef-server.git",
+      "git": "https://github.com/opscode-cookbooks/chef-server.git",
       "ref": "14a50c59023bce36be24b502ea74d4bd0276ac4f"
     },
     "application": {
@@ -26,22 +26,22 @@
     },
     "application_ruby": {
       "locked_version": "3.0.2",
-      "git": "git@github.com:poise/application_ruby.git",
+      "git": "https://github.com/poise/application_ruby.git",
       "ref": "fde770d176b5d0519982e2ec93bcf2d1a3ad35bb"
     },
     "mongodb": {
       "locked_version": "0.16.0",
-      "git": "git@github.com:edelight/chef-mongodb.git",
+      "git": "https://github.com/edelight/chef-mongodb.git",
       "ref": "fdf29cac194530a9bc870d31489b9de5a558f813"
     },
     "nginx": {
       "locked_version": "2.6.3",
-      "git": "git@github.com:maisaengineering/nginx.git",
+      "git": "https://github.com/maisaengineering/nginx.git",
       "ref": "0b5ca18342470da8c45289bf26c92651791ebde1"
     },
     "deploy_key": {
       "locked_version": "0.1.0",
-      "git": "git@github.com:cassianoleal/cookbook-deploy_key.git",
+      "git": "https://github.com/cassianoleal/cookbook-deploy_key.git",
       "ref": "12692bdc6de3a7056e8400774bb3d1baab1fdd72"
     },
     "java": {
